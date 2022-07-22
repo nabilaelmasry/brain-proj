@@ -24,6 +24,10 @@ class RegisterUser(APIView):
         if serializer.is_valid():
             account = serializer.save()
 
+            print(request.data)
+            print(serializer.data['username'])
+            print(serializer.data['email'])
+
             data['response'] = "Successful Registration!"
             data['username'] = serializer.data['username']
             data['email'] = serializer.data['email']
@@ -33,6 +37,7 @@ class RegisterUser(APIView):
             data['token'] = token
 
         else:
+            print('Error')
             data = serializer.errors
 
         return Response(data)
